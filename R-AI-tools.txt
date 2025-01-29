@@ -1,0 +1,10 @@
+R AI tools
+
+
+2024 LLMs/genAI + R roundup
+https://luisdva.github.io/rstats/LLMsR/
+
+https://simonpcouch.github.io/gander/
+gander is a higher-performance and lower-friction chat experience for data scientists in RStudio and Positron.
+
+

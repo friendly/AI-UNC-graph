@@ -18,7 +18,6 @@ UNC <- UNC |>
 lm(rate ~ applicants, data=UNC)
 lm(accepted ~ applicants, data=UNC)
 
-
 ggplot(data=UNC,
        aes(x = applicants, y = rate)) +
   geom_point(size = 4) +
@@ -44,3 +43,15 @@ ggplot(data=UNC,
   scale_y_continuous(label = unit_format(unit = "K", scale = 1e-3, sep = "")) +
   theme_minimal(base_size = 14)
 
+
+#John Fox graph
+(acc <- UNC$accepted <- with(UNC, round(rate*applicants/100)))
+
+plot(rate ~ I(applicants/1000), data=UNC, type="b", pch=21, bg="gray",
+     cex=4*acc/max(acc),
+     xlab="Number of Applicants (1000s)",
+     ylab="Acceptance Rate (percent)")
+with(UNC, text(applicants/1000, rate, labels=year, cex=0.9,
+               pos=ifelse(applicants < 65000, 4, 2))) 
+          text(58, 22, cex=0.9,
+               labels="size of dots proportional to\nnumber of students admitted")

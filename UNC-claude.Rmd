@@ -4,9 +4,9 @@ subtitle: "A conversation with a chatbot about a graph"
 author: "Michael Friendly & Claude Haiku"
 date: "`r Sys.Date()`"
 output:
-  pdf_document: default
-  html_document: default
   word_document: default
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -49,7 +49,7 @@ In a blog post [Using ChatGPT to interpret charts](https://www.descript.com/blog
 Briana Brownell claimed "Got a chart you're having trouble making sense of?  Give it to ChatGPT and it can tell you the main findings from it." With several different type of graphic displays, she found "Overall, I was impressed with its interpretation of the information. But when I tested it on a busy marketing dashboard, cracks began to show."
 
 
-As an observational, qualitative experiment, I took [Claude 3 Haiku](https://www.anthropic.com/news/claude-3-family) out for a run
+As an observational, qualitative experiment ($N=1$), I took [Claude 3 Haiku](https://www.anthropic.com/news/claude-3-family) out for a run
 with an apparently simple, but provocative graph that appeared on Blue Sky. This was really a two-sided experiment, because
 I also wanted to explore how to ask questions of Claude and how to probe his understanding, not
 only of the graph, but also his and _my_ learning from a conversation. Thus, he is a co-author on this report.
@@ -59,8 +59,8 @@ This may have been naive, but that's where I started.
 
 ### The topic
 In the Blue Sky post that was the origin of my experiment, [Xan Gregg](https://bsky.app/profile/xangregg.bsky.social), a graphics engineer at
-SAS Institute, asked a simple question about
-a graph that had appeared in the [Daily Tarheel](https://www.dailytarheel.com/article/2025/01/university-common-data-set)
+JMP Statistical Discovery, asked a simple question about
+a graph that had appeared in the [Daily Tar Heel](https://www.dailytarheel.com/article/2025/01/university-common-data-set)
 concerning applicants and the rate of admission to the University of North Carolina (UNC).
 
 ![](images/XanGregg-post.png){width=70% height=70%}
@@ -552,12 +552,14 @@ applied to the problem of graph comprehension and construction. For a proper Tur
 should have been another human answering the same questions, but I played that role as well as being
 the interrogator. Nevertheless, I'm convinced that Claude failed this test. He would have passed if I judged his performance indistinguishable from that of an advanced undergrad with basic
 knowledge of the uses of various graphic forms and ability to code these in R.
+He did reasonably well at coding graphs with `ggplot`, but lacked insight in how to design a graph to
+show some particular relationship.
 
 When I first looked at the original graph, my initial thought was that the data on admissions
 could best be shown in a scatterplot, connecting the points with lines ordered by year.
 This entirely avoids the problems with display of two time series with separate Y axes.
 I tried to frame questions leading him in this direction, but without asking for something
-like this directly.
+like this directly. 
 
 The direct way to show that, plotting acceptance rate against number of applicants is shown below.
 I also added the linear regression fit to support the conclusion stated in the plot title.
@@ -580,7 +582,7 @@ Another idea was that the relationship between number of applicants and number o
 was more direct than that with _rates_ of admission. Here is my attempt to capture this
 and supply a title for what I saw in this plot.
 
-```{r}
+```{r UNC-MF2}
 library(dplyr)
 library(scales)
 
@@ -626,13 +628,22 @@ a text input might have been something quirky like ["The Pope wearing a puffy ja
 focused like "A data analyst looking at two screens trying to decide which data visualization to present at a business meeting."
 
 This has given rise to [detailed tips for generating digital art](https://www.blueshadow.art/midjourney-prompt-commands/) with specialize prompts indicating
-various aspects of the main and background content, color schemes, lighting and so forth, as in this example:
+various aspects of the main and background content, color schemes, lighting and so forth, as in this example, constructed by Midjourney from the (over-the-top) prompt:
 
-```{r cyberpunk, echo=FALSE, fig.show='hold', out.width="45%"}
-knitr::include_graphics("images/midjourney-cyberpunk-prompt.png")
+> _cyberpunk girl in jacket, colorful tatoos, harlequin cyberpunk, highly detailed. Anna-Lou Leibowitz, dark environment, neon colors, back lighting, cinematic scene, cinematic lighting, movie poster, dramatic color variations, strong contrast lighting, 8K, hypermaximalist, detailed intricate, ray tracing, insane detailise ink illustration._
+
+```{r cyberpunk, echo=FALSE}
 knitr::include_graphics("images/midjourney-cyberpunk.png")
 ```
 
+<!--
+```{r cyberpunk2, echo=FALSE, fig.height = 4, out.width = "95%"}
+library(cowplot)
+ggdraw() + 
+  draw_image("images/midjourney-cyberpunk-prompt.png", width = 0.49) + 
+  draw_image("images/midjourney-cyberpunk.png", width = 0.49, x = 0.51)
+```
+-->
 
 The present inquiry used several other problem forms, in the context of data visualization:
 
@@ -640,7 +651,8 @@ The present inquiry used several other problem forms, in the context of data vis
 * **data-to-code and image**: Given data, generate software code to reproduce the image.
 * **image-to-image**: Take a given version of a data graphic and re-imagine it in a different graphic form.
 
-There are some tips for such problems, but this domain seems to be largely unstudied in the framework of generative AI and LLMs.
+There are some tips for such problems, but this domain seems to be largely unstudied in the framework of generative AI and LLMs. In a way, my role here was that of a cultural anthropologist, exploring the
+cognition and visual thinking of a newly discovered humanoid society.
 
 Claude did rather well on some of the basic aspects of these tasks, but failed miserably on anything having to do with really understanding the relationships among variables in my example and how best
 to illustrate these in graphic displays. I share responsibility for this with my co-author. Perhaps
