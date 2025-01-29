@@ -4,8 +4,8 @@ subtitle: "A conversation with a chatbot about a graph"
 author: "Michael Friendly & Claude Haiku"
 date: "`r Sys.Date()`"
 output:
-  word_document: default
   html_document: default
+  word_document: default
   pdf_document: default
 ---
 
