@@ -4,10 +4,13 @@ subtitle: "A conversation with a chatbot about a graph"
 author: "Michael Friendly & Claude Haiku"
 date: "`r Sys.Date()`"
 output:
-  html_document: default
   word_document: default
+  html_document: default
   pdf_document: default
 ---
+<!-- Published on
+https://connect.posit.cloud/friendly/content/0194b402-7ad8-9e38-0105-6c537d84af62
+-->
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
@@ -18,6 +21,8 @@ knitr::opts_chunk$set(
   out.width = "80%"
   )
 ```
+
+![](images/cover-img.png){width=100% height=100%}
 
 ## Introduction
 
@@ -36,6 +41,7 @@ LLMs have proven to be very good at tasks using text. They can give a reasonable
 paper from a PDF, or outline the similarities and differences between the philosophies of
 Plato and Aristotle or between behaviorism and cognitive science. They can even be led to
 [write poetry about graphs in the style of some poet](https://bsky.app/profile/datavisfriendly.bsky.social/post/3lgcgievyts2k).
+And, some people have asked the question "[Can GPT help create data visualisations?](https://questionsindataviz.com/2025/02/10/can-gpt-help-create-data-visualisations/)" with encouraging results.
 
 But how does this translate to tasks involving _understanding_ of quantitative data displayed
 in an _image_ of a graph of data? 
@@ -48,7 +54,21 @@ in an _image_ of a graph of data?
 In a blog post [Using ChatGPT to interpret charts](https://www.descript.com/blog/article/using-chatgpt-data-analysis-to-interpret-charts--diagrams),
 Briana Brownell claimed "Got a chart you're having trouble making sense of?  Give it to ChatGPT and it can tell you the main findings from it." With several different type of graphic displays, she found "Overall, I was impressed with its interpretation of the information. But when I tested it on a busy marketing dashboard, cracks began to show."
 
+To put this in a wider context, consider what a human data analyst does in constructing a graph from a dataset using [`ggplot2`](https://ggplot2-book.org/). In the example considered here, there are two time series to be displayed,
+and she might decide to portray one with a bar chart (`geom_bar()`) and the other with a line graph (`geom_bar()`).
 
+![](images/idea-graph-code.png){width=70% height=70%}
+
+The task for AI considered here is apparently simpler. I present it with a graph and ask it to decode the graphical features, and then try to reproduce the graph with R. But to do this, it
+must decode the information that had been encoded in the lines and bars, and then write code
+to produce the graphic result.
+
+![](images/graph-claude-decode-code.png){width=70% height=70%}
+
+But the human graph designer sees the result immediately. She can quickly tell if the graph conveys the intended message and if not, try other graphic forms. What knowledge of graphs do
+LLM chatbots bring to the table?
+
+## An experiment with Claude
 As an observational, qualitative experiment ($N=1$), I took [Claude 3 Haiku](https://www.anthropic.com/news/claude-3-family) out for a run
 with an apparently simple, but provocative graph that appeared on Blue Sky. This was really a two-sided experiment, because
 I also wanted to explore how to ask questions of Claude and how to probe his understanding, not
