@@ -4,11 +4,11 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-![](images/graph-claude-decode-code.png){width=70% height=70%}
+![](images/graph-claude-decode-code.png)
 
 How much does AI know about understanding and producing graphs?
 This article describes an experiment where I give a graph to
-Claude Haiku and ask the following questions:
+[Claude 3 Haiku](https://www.anthropic.com/news/claude-3-family) and ask the following questions:
 
 * Can AI correctly interpret the information that is shown in graphs of different types?
 * Does it understand the variety of types of charts and the uses in communication for which they are well-suited or fail?
